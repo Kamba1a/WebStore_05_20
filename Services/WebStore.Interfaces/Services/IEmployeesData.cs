@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using WebStore.Domain.Models;
 
 namespace WebStore.Interfaces.Services
@@ -7,14 +9,26 @@ namespace WebStore.Interfaces.Services
     {
         IEnumerable<Employee> GetAll();
 
+        Task<IEnumerable<Employee>> GetAllAsync(CancellationToken Cancel = default);
+
         Employee GetById(int id);
 
-        void Add(Employee Employee);
+        Task<Employee> GetByIdAsync(int id, CancellationToken Cancel = default);
 
-        void Edit(int id, Employee Employee);
+        int Add(Employee Employee);
+
+        Task<int> AddAsync(Employee Employee, CancellationToken Cancel = default);
+
+        void Edit(Employee Employee);
+
+        Task EditAsync(Employee Employee, CancellationToken Cancel = default);
 
         bool Delete(int id);
 
+        Task<bool> DeleteAsync(int id, CancellationToken Cancel = default);
+
         void SaveChanges();
+
+        Task SaveChangesAsync(CancellationToken Cancel = default);
     }
 }
